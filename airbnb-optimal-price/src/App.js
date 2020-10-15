@@ -1,17 +1,22 @@
 // Import Dependencies
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
+// Import Components
 import Login from './components/Login';
 import Register from './components/Register';
+import Homepage from './components/Homepage';
+import Header from './components/Header';
 
 // Import Assets
 import './App.css';
-import Homepage from './components/Homepage';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        
+        <Header />
 
         <Route exact path="/">
           <Homepage />
