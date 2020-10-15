@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import PrivateRoute from "../utilities/PrivateRoute";
+// import PrivateRoute from "../utilities/PrivateRoute";
 
 // Import Assets
 import "./App.css";
