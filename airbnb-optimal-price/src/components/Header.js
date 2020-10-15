@@ -1,13 +1,13 @@
 // Import Dependencies
 import React from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
     <header>
       <nav>
-        <NavLink to="/login">Login Page</NavLink>
-        <NavLink to="/register">Register Page</NavLink>
+        <NavLink to="/login" activeClassName="active">Login Page</NavLink>
+        <NavLink to="/register" activeClassName="active">Register Page</NavLink>
       </nav>
     </header>
   )
