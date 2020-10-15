@@ -1,21 +1,25 @@
 // Import Dependencies
-import React from 'react';
+import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// Import Components
-import Login from './components/Login';
-import Register from './components/Register';
-import Homepage from './components/Homepage';
-import Header from './components/Header';
+// import PrivateRoute from "../utilities/PrivateRoute";
 
 // Import Assets
-import './App.css';
+import "./App.css";
+
+// Import Components
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Homepage from "./components/Homepage";
+import Header from "./components/Header";
+
+// Import Assets
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        
         <Header />
 
         <Route exact path="/">
@@ -29,7 +33,6 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-
       </div>
     </Router>
   );
