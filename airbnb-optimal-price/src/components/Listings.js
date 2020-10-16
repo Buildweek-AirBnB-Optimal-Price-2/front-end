@@ -64,8 +64,8 @@ export default function Listings() {
     <div id="listings">
       <h3 className="heading">Listings</h3>
 
-      {listings.length > 0 && listings.map((listing) => {
-        return <ListingCard listing={listing} />
+      {listings.length > 0 && listings.map((listing, index) => {
+        return <ListingCard listing={listing} key={index} />
       })}
 
       {listings.length <= 0 && "No Listings Found"}
