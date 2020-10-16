@@ -29,7 +29,7 @@ margin-right: 25px;
 
 const CardInfo = styled.div`
 position: relative;
-width: 58%
+width: 58%;
 
 @media (max-width: 800px) {
   width: 100%;
@@ -104,7 +104,7 @@ export default function ListingCard(props) {
     <Card>
       <CardImg src={props.listing.featuredImg} alt={props.listing.title} />
       
-      <div>
+      <CardInfo>
         <CardHeading>{props.listing.type} in {props.listing.location}</CardHeading>
         <CardTitle>{props.listing.title}</CardTitle>
 
@@ -136,7 +136,7 @@ export default function ListingCard(props) {
           <CardButton>Edit</CardButton>
           <CardButton>Remove</CardButton>
         </CardButtons>
-      </div>
+      </CardInfo>
     </Card>
   )
 }
