@@ -6,8 +6,9 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <NavLink to="/login" activeClassName="active">Login Page</NavLink>
-        <NavLink to="/register" activeClassName="active">Register Page</NavLink>
+        <NavLink to="/listings" activeClassName="active">Listings</NavLink>
+        <NavLink to="/login" activeClassName="active">Login</NavLink>
+        <NavLink to="/register" activeClassName="active">Register</NavLink>
       </nav>
     </header>
   )

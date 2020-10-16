@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Homepage from "./components/Homepage";
 import Header from "./components/Header";
+import Listings from "./components/Listings";
 
 // Import Assets
 import "./App.css";
@@ -24,6 +25,10 @@ function App() {
 
         <Route exact path="/">
           <Homepage />
+        </Route>
+
+        <Route path="/listings">
+          <Listings />
         </Route>
 
         <Route path="/login">
