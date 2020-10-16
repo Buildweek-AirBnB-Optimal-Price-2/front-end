@@ -27,6 +27,19 @@ header a.active {
   color: #fcf9ea;
 }
 
+/* Listing Styles */
+
+#listings {
+  width: 80%;
+  margin: 25px auto;
+}
+
+#listings h3.heading {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
 /* Form Styles */
 
 .form-container {
