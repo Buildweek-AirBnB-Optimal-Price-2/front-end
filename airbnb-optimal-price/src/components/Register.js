@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { gsap } from "gsap";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+// import axios from "axios";
+// import { useHistory } from "react-router-dom";
 
 export default function Register() {
   // Declare a variable holding the default empty data

@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { gsap } from "gsap";
-import axiosWithAuth from "../utilities/axiosWithAuth";
-import { useHistory } from "react-router-dom";
+// import axiosWithAuth from "../utilities/axiosWithAuth";
+// import { useHistory } from "react-router-dom";
 
 export default function Login() {
   // Declare a variable holding the default empty data
