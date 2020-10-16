@@ -1,35 +1,39 @@
 // Import Dependencies
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import * as yup from "yup";
 import { gsap } from "gsap";
+// import axios from "axios";
+// import { useHistory } from "react-router-dom";
 
 export default function Register() {
-
   // Declare a variable holding the default empty data
-  const defaultUserData = {name: "", password: "", username: "", email: ""};
+  const defaultUserData = { name: "", password: "", username: "", email: "" };
 
   // Get the state to hold the form data
-  const [ user, setUser ] = useState(defaultUserData);
+  const [user, setUser] = useState(defaultUserData);
 
   // Set the state for the errors for validation
-  const [ errors, setErrors ] = useState({});
+  const [errors, setErrors] = useState({});
 
   // Set state for to disable submit button
   const [disableSubmit, setDisableSubmit] = useState(false);
 
   // Function to handle the text field change to set to the user state
   const handleChange = (e) => {
-    const userData = {...user, [e.target.name]: e.target.value};
+    const userData = { ...user, [e.target.name]: e.target.value };
 
     setUser(userData);
-  }
+  };
 
   // Form schema to be used for form validation
   const formSchema = yup.object().shape({
     name: yup.string().required("Please enter a name."),
     password: yup.string().required("Please enter a password."),
     username: yup.string().required("Please enter a username."),
-    email: yup.string().required("Please enter an email.").email("Please enter a valid email."),
+    email: yup
+      .string()
+      .required("Please enter an email.")
+      .email("Please enter a valid email."),
   });
 
   // Form to catch any errors if the form did not validated
@@ -57,6 +61,21 @@ export default function Register() {
   // Function to handle the form submission
   const handleSubmission = (e) => {
     e.preventDefault();
+    // POST request
+    // axios
+    //   .post("/endpoint", user)
+    //   .then((res) => {
+    //     console.log("New User from Registration", res.data);
+    //     setUser({
+    //       name: "",
+    //       password: "",
+    //       username: "",
+    //       email: "",
+    //     });
+    //  alert("account created, please sign in");
+    // push("/login");
+    //   })
+    //   .catch((err) => console.log("err", err.message));
 
     // Check for errors first
     formErrors();
@@ -74,7 +93,6 @@ export default function Register() {
 
         // Clear the form
         setUser(defaultUserData);
-        
       } else {
         // Add a little animation if not valid
         const errorAnim = gsap.timeline({ repeat: 0, repeatDelay: 0 });
@@ -92,41 +110,97 @@ export default function Register() {
         }, 1000);
       }
     });
-  }
-  
+  };
+
   return (
     <div className="form-container">
       <h3>Registration Form</h3>
 
       <form onSubmit={handleSubmission}>
-        <label htmlFor="name" className={`${(errors.name !== "" && errors.name !== undefined) ? "invalid" : "valid"}`}>
+        <label
+          htmlFor="name"
+          className={`${
+            errors.name !== "" && errors.name !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
           Name
-          <input type="text" id="name" name="name" value={user.name} onChange={handleChange} />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={user.name}
+            onChange={handleChange}
+          />
         </label>
 
-        <label htmlFor="username" className={`${(errors.username !== "" && errors.username !== undefined) ? "invalid" : "valid"}`}>
+        <label
+          htmlFor="username"
+          className={`${
+            errors.username !== "" && errors.username !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
           Username
-          <input type="text" id="username" name="username" value={user.username} onChange={handleChange} />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={user.username}
+            onChange={handleChange}
+          />
         </label>
 
-        <label htmlFor="email" className={`${(errors.email !== "" && errors.email !== undefined) ? "invalid" : "valid"}`}>
+        <label
+          htmlFor="email"
+          className={`${
+            errors.email !== "" && errors.email !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
           Email
-          <input type="text" id="email" name="email" value={user.email} onChange={handleChange} />
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+          />
         </label>
 
-        <label htmlFor="password" className={`${(errors.password !== "" && errors.password !== undefined) ? "invalid" : "valid"}`}>
+        <label
+          htmlFor="password"
+          className={`${
+            errors.password !== "" && errors.password !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
           Password
-          <input type="password" id="password" name="password" value={user.password} onChange={handleChange} />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
         </label>
 
         <input type="submit" value="Log in" disabled={disableSubmit} />
       </form>
 
-      {Object.keys(errors).length > 0 && <div className="errors">
-        {Object.keys(errors).map(key => 
-            <p value={key} key={key}>{errors[key]}</p>
-        )}
-      </div>}
+      {Object.keys(errors).length > 0 && (
+        <div className="errors">
+          {Object.keys(errors).map((key) => (
+            <p value={key} key={key}>
+              {errors[key]}
+            </p>
+          ))}
+        </div>
+      )}
     </div>
-  )
+  );
 }
