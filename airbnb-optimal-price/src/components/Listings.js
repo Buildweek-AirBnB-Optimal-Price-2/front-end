@@ -85,7 +85,9 @@ export default function Listings() {
       </div>
 
       {listings.length > 0 && listings.map((listing, index) => {
-        return <ListingCard listing={listing} key={listing.id} deleteListing={deleteListing} delay={index} />
+        const delayTimer = index;
+
+        return <ListingCard listing={listing} key={listing.id} deleteListing={deleteListing} delay={delayTimer} />
       })}
 
       {listings.length <= 0 && <p style={{textAlign: "center"}}>No Listings Found</p>}

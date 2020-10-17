@@ -124,7 +124,7 @@ export default function ListingCard(props) {
     const delay = (props.delay / 10) + 0.01;
 
     gsap.from(`#listing-${props.listing.id}`, {opacity: 0, x: -100, duration: 1, delay: delay});
-  }, [props.listing, props.delay])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Card id={`listing-${props.listing.id}`} className="listing-wrapper">
