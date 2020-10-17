@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 
 // Import Components
 import ListingCard from "./ListingCard";
+import AddListing from "./AddListing";
 
 // Dummy temp data
 const dummyData = [
@@ -108,7 +109,7 @@ export default function Listings() {
           {listings.length > 1 ? "listings" : "listing"} found
         </h3>
 
-        <button>Add New Listing</button>
+        <button onClick={AddListing}>Add New Listing</button>
       </div>
 
       {listings.length > 0 &&
