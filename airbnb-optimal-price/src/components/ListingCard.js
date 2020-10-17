@@ -10,6 +10,7 @@ border-bottom: 1px solid #ebebeb;
 display: flex;
 max-width: 800px;
 justify-content: space-between;
+margin: 0 auto;
 
 @media (max-width: 800px) {
   width: 100%;

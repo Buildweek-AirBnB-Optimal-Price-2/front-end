@@ -71,15 +71,17 @@ export default function Listings() {
 
   return (
     <div id="listings">
-      <h3 className="heading">Listings</h3>
+      <div className="heading">
+        <h3>Listings - {listings.length} {listings.length > 1 ? "listings": "listing"} found</h3>
 
-      <button>Add New Listing</button>
+        <button>Add New Listing</button>
+      </div>
 
       {listings.length > 0 && listings.map((listing, index) => {
         return <ListingCard listing={listing} key={index} deleteListing={deleteListing} delay={index} />
       })}
 
-      {listings.length <= 0 && "No Listings Found"}
+      {listings.length <= 0 && <p style={{textAlign: "center"}}>No Listings Found</p>}
     </div>
   )
 }
