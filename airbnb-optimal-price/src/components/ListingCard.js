@@ -1,5 +1,5 @@
 // Import Dependencies
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { gsap } from "gsap";
 
@@ -98,16 +98,16 @@ font-size: 18px;
 &:hover {
   background: #ff8a5c;
 }
+
+&:disabled {
+  background: #49beb7 !important;
+}
 `;
 
 export default function ListingCard(props) {
 
-  // Do a small animation when the component first renders
-  useEffect(() => {
-    const delay = (props.delay / 10) + 0.1;
-
-    gsap.from(`#listing-${props.listing.id}`, {opacity: 0, x: -100, duration: 1, delay: delay});
-  })
+  // Set a state to disable buttons when it is deleting
+  const [ isDeleting, setIsDeleting ] = useState(false);
 
   // Confirm first whether or not to delete listing
   const confirmDeletion = () => {
@@ -115,8 +115,16 @@ export default function ListingCard(props) {
 
     if(prompt === true){ 
       props.deleteListing(props.listing.id);
+      setIsDeleting(true);
     }
   }
+
+  // Do a small animation when the component first renders
+  useEffect(() => {
+    const delay = (props.delay / 10) + 0.01;
+
+    gsap.from(`#listing-${props.listing.id}`, {opacity: 0, x: -100, duration: 1, delay: delay});
+  }, [props.listing, props.delay])
 
   return (
     <Card id={`listing-${props.listing.id}`} className="listing-wrapper">
@@ -151,8 +159,8 @@ export default function ListingCard(props) {
         }
 
         <CardButtons>
-          <CardButton>Edit</CardButton>
-          <CardButton onClick={confirmDeletion}>Remove</CardButton>
+          <CardButton disabled={isDeleting}>Edit</CardButton>
+          <CardButton onClick={confirmDeletion} disabled={isDeleting}>Remove</CardButton>
         </CardButtons>
       </CardInfo>
     </Card>

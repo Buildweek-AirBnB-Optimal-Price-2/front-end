@@ -1,5 +1,6 @@
 // Import Dependencies
 import React, { useEffect, useState } from 'react';
+import { gsap } from "gsap";
 
 // Import Components
 import ListingCard from './ListingCard';
@@ -65,8 +66,14 @@ export default function Listings() {
     // Create a new array where the listing that matches the ID is removed
     const newListingArray = listings.filter((listing) => listing.id !== id);
 
-    // Set the new listing array to the listings
-    setListings(newListingArray);
+    // Do a small animation for the deleted listing
+    gsap.to(`#listing-${id}`, {scale: 0.8, opacity: 0.8, duration: 0.5});
+    gsap.to(`#listing-${id}`, {x: -100, opacity: 0, duration: 0.5, delay: 0.5});
+
+    // Set the new listing array to the listings once the animation finishes
+    setTimeout(() => {
+      setListings(newListingArray);
+    }, 1000)
   }
 
   return (
@@ -78,7 +85,7 @@ export default function Listings() {
       </div>
 
       {listings.length > 0 && listings.map((listing, index) => {
-        return <ListingCard listing={listing} key={index} deleteListing={deleteListing} delay={index} />
+        return <ListingCard listing={listing} key={listing.id} deleteListing={deleteListing} delay={index} />
       })}
 
       {listings.length <= 0 && <p style={{textAlign: "center"}}>No Listings Found</p>}
