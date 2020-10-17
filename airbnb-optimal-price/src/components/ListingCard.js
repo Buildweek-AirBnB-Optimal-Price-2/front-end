@@ -101,6 +101,7 @@ font-size: 18px;
 
 &:disabled {
   background: #49beb7 !important;
+  opacity: 0.5;
 }
 `;
 
