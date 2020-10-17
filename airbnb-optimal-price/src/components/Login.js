@@ -63,7 +63,7 @@ export default function Login() {
     // Check response data for what to setItem to below
     // console.log(res.data)
     //    localStorage.setItem("token", res.data.token);
-    //    history.pushState('/protected')
+    //    history.push('/protected')
     //  })
     // .catch((err) => console.log("err", err.message));
     // Check for errors first

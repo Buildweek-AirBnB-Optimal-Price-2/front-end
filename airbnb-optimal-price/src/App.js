@@ -13,7 +13,7 @@ import Register from "./components/Register";
 import Homepage from "./components/Homepage";
 import Header from "./components/Header";
 import Listings from "./components/Listings";
-
+import AddListing from "./components/AddListing";
 // Import Assets
 import "./App.css";
 
@@ -29,6 +29,13 @@ function App() {
 
         <Route path="/listings">
           <Listings />
+        </Route>
+
+        {/* This will replace the route above */}
+        {/* <PrivateRoute exact path="/listings" component={Listings}/> */}
+
+        <Route path="/addlisting">
+          <AddListing />
         </Route>
 
         <Route path="/login">

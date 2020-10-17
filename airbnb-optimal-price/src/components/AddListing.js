@@ -16,9 +16,11 @@ const AddListing = () => {
     salePrice: "",
     featuredImg: "",
   });
-  const addListing = () => {
+  const addListing = (e) => {
+    e.preventDefault();
+    console.log("hitting addListing");
     axios
-      .post("http://endpoint", listing)
+      .post("https://5f3fba8744212d0016fed1c4.mockapi.io/listings", listing)
       .then((res) => {
         console.log("AddListing.js: post: res: ", res);
       })
@@ -26,7 +28,7 @@ const AddListing = () => {
   };
   const handleChange = (e) => {
     setListing({
-      ...movie,
+      ...listing,
       [e.target.name]: e.target.value,
     });
   };
@@ -131,9 +133,12 @@ const AddListing = () => {
           placeholder="Image URL"
           value={listing.featuredImg}
         />
-        <button className="btn" type="submit">
-          Add Listing
-        </button>
+
+        <div>
+          <button className="btn" type="submit">
+            Add Listing
+          </button>
+        </div>
       </form>
     </div>
   );
