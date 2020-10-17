@@ -1,5 +1,5 @@
 // Import Dependencies
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { gsap } from "gsap";
 
@@ -106,16 +106,12 @@ font-size: 18px;
 
 export default function ListingCard(props) {
 
-  // Set a state to disable buttons when it is deleting
-  const [ isDeleting, setIsDeleting ] = useState(false);
-
   // Confirm first whether or not to delete listing
   const confirmDeletion = () => {
     const prompt = window.confirm("Are you sure you want to delete this listing?"); 
 
     if(prompt === true){ 
       props.deleteListing(props.listing.id);
-      setIsDeleting(true);
     }
   }
 
@@ -159,8 +155,8 @@ export default function ListingCard(props) {
         }
 
         <CardButtons>
-          <CardButton disabled={isDeleting}>Edit</CardButton>
-          <CardButton onClick={confirmDeletion} disabled={isDeleting}>Remove</CardButton>
+          <CardButton disabled={props.isDeleting}>Edit</CardButton>
+          <CardButton onClick={confirmDeletion} disabled={props.isDeleting}>Remove</CardButton>
         </CardButtons>
       </CardInfo>
     </Card>
