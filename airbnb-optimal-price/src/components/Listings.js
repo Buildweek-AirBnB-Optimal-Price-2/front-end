@@ -60,12 +60,23 @@ export default function Listings() {
     setListings(dummyData);
   }, []);
 
+  // Function for deleting a listing
+  const deleteListing = (id) => {
+    // Create a new array where the listing that matches the ID is removed
+    const newListingArray = listings.filter((listing) => listing.id !== id);
+
+    // Set the new listing array to the listings
+    setListings(newListingArray);
+  }
+
   return (
     <div id="listings">
       <h3 className="heading">Listings</h3>
 
+      <button>Add New Listing</button>
+
       {listings.length > 0 && listings.map((listing, index) => {
-        return <ListingCard listing={listing} key={index} />
+        return <ListingCard listing={listing} key={index} deleteListing={deleteListing} delay={index} />
       })}
 
       {listings.length <= 0 && "No Listings Found"}
