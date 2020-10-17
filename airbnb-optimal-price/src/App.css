@@ -34,10 +34,21 @@ header a.active {
   margin: 25px auto;
 }
 
-#listings h3.heading {
+#listings .heading {
+  display: flex;
+  border-top: #000 1px solid;
+  border-bottom: #000 1px solid;
+  padding: 10px 15px;
+  margin: 15px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#listings .heading h3 {
   font-weight: 600;
   margin-bottom: 15px;
   font-size: 18px;
+  margin: 0 20px 0 0;
 }
 
 /* Form Styles */

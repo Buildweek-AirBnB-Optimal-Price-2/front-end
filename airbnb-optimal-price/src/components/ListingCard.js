@@ -1,6 +1,7 @@
 // Import Dependencies
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { gsap } from "gsap";
 
 // Styled Components
 const Card = styled.div`
@@ -9,6 +10,7 @@ border-bottom: 1px solid #ebebeb;
 display: flex;
 max-width: 800px;
 justify-content: space-between;
+margin: 0 auto;
 
 @media (max-width: 800px) {
   width: 100%;
@@ -91,17 +93,38 @@ border: none;
 text-align: center;
 padding: 5px 10px;
 margin-right: 5px;
+font-size: 18px;
 
 &:hover {
   background: #ff8a5c;
 }
-`;
 
+&:disabled {
+  background: #49beb7 !important;
+  opacity: 0.5;
+}
+`;
 
 export default function ListingCard(props) {
 
+  // Confirm first whether or not to delete listing
+  const confirmDeletion = () => {
+    const prompt = window.confirm("Are you sure you want to delete this listing?"); 
+
+    if(prompt === true){ 
+      props.deleteListing(props.listing.id);
+    }
+  }
+
+  // Do a small animation when the component first renders
+  useEffect(() => {
+    const delay = (props.delay / 10) + 0.01;
+
+    gsap.from(`#listing-${props.listing.id}`, {opacity: 0, x: -100, duration: 1, delay: delay});
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <Card>
+    <Card id={`listing-${props.listing.id}`} className="listing-wrapper">
       <CardImg src={props.listing.featuredImg} alt={props.listing.title} />
       
       <CardInfo>
@@ -133,8 +156,8 @@ export default function ListingCard(props) {
         }
 
         <CardButtons>
-          <CardButton>Edit</CardButton>
-          <CardButton>Remove</CardButton>
+          <CardButton disabled={props.isDeleting}>Edit</CardButton>
+          <CardButton onClick={confirmDeletion} disabled={props.isDeleting}>Remove</CardButton>
         </CardButtons>
       </CardInfo>
     </Card>

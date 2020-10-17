@@ -1,5 +1,6 @@
 // Import Dependencies
 import React, { useEffect, useState } from 'react';
+import { gsap } from "gsap";
 
 // Import Components
 import ListingCard from './ListingCard';
@@ -55,20 +56,47 @@ export default function Listings() {
   // Setup the state that will get the listings
   const [ listings, setListings ] = useState([]);
 
+  // Set a state to disable buttons when it is deleting
+  const [ isDeleting, setIsDeleting ] = useState(false);
+
   // Function used to gather the listings whenever component loads
   useEffect(() => {
     setListings(dummyData);
   }, []);
 
+  // Function for deleting a listing
+  const deleteListing = (id) => {
+    // Create a new array where the listing that matches the ID is removed
+    const newListingArray = listings.filter((listing) => listing.id !== id);
+
+    setIsDeleting(true);
+
+    // Do a small animation for the deleted listing
+    gsap.to(`#listing-${id}`, {scale: 0.8, opacity: 0.8, duration: 0.5});
+    gsap.to(`#listing-${id}`, {x: -100, opacity: 0, duration: 0.5, delay: 0.5});
+
+    // Set the new listing array to the listings once the animation finishes
+    setTimeout(() => {
+      setListings(newListingArray);
+      setIsDeleting(false);
+    }, 1000)
+  }
+
   return (
     <div id="listings">
-      <h3 className="heading">Listings</h3>
+      <div className="heading">
+        <h3>Listings - {listings.length} {listings.length > 1 ? "listings": "listing"} found</h3>
+
+        <button>Add New Listing</button>
+      </div>
 
       {listings.length > 0 && listings.map((listing, index) => {
-        return <ListingCard listing={listing} key={index} />
+        const delayTimer = index;
+
+        return <ListingCard listing={listing} key={listing.id} deleteListing={deleteListing} delay={delayTimer} isDeleting={isDeleting} />
       })}
 
-      {listings.length <= 0 && "No Listings Found"}
+      {listings.length <= 0 && <p style={{textAlign: "center"}}>No Listings Found</p>}
     </div>
   )
 }
