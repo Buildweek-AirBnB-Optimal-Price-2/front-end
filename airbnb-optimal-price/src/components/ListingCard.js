@@ -1,9 +1,10 @@
 // Import Dependencies
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ListingsContext } from "../utilities/ListingsContext";
-
+import { Link } from "react-router-dom";
+import EditListing from "./EditListing";
 // Styled Components
 const Card = styled.div`
   padding: 20px 0;
@@ -109,8 +110,6 @@ const CardButton = styled.button`
 export default function ListingCard(props) {
   //  Context provides the props
   console.log("props", props);
-  const listing = useContext(ListingsContext);
-  console.log("context listing:", listing);
 
   // Confirm first whether or not to delete listing
   const confirmDeletion = () => {
@@ -180,7 +179,9 @@ export default function ListingCard(props) {
         )}
 
         <CardButtons>
-          <CardButton disabled={props.isDeleting}>Edit</CardButton>
+          <Link to={`/EditListing/${props.listing.id}`}>
+            <CardButton disabled={props.isDeleting}>Edit</CardButton>
+          </Link>
           <CardButton onClick={confirmDeletion} disabled={props.isDeleting}>
             Remove
           </CardButton>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const initialListing = {
@@ -15,24 +16,30 @@ const initialListing = {
   salePrice: "",
   featuredImg: "",
 };
-const AddListing = () => {
+
+export default function EditListing() {
   const [listing, setListing] = useState(initialListing);
-  const addListing = (e) => {
-    e.preventDefault();
-    console.log("hitting addListing");
+  const { id } = useParams();
+  console.log("id", id);
+  const { push } = useHistory();
+  useEffect(() => {
     axios
-      .post("https://5f3fba8744212d0016fed1c4.mockapi.io/listings", listing)
+      .get(`https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`)
       .then((res) => {
-        console.log("AddListing.js: post: res: ", res);
+        console.log("EditListing.js: useEffect: get: res: ", res);
+        setListing(res.data);
       })
-      .catch((err) => console.error("err from AddListing", err));
-  };
+      .catch((err) => console.error(`unable to getById # ${id}: `, err));
+  }, [id]);
+
   const handleChange = (e) => {
+    e.persist();
     setListing({
       ...listing,
       [e.target.name]: e.target.value,
     });
   };
+
   const handleAmenitiesChange = (e) => {
     const changedAmenities = e.target.value.split(",");
     setListing({
@@ -41,11 +48,27 @@ const AddListing = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(
+        `https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`,
+        listing
+      )
+      .then((res) => {
+        console.log("Response from PUT;", res);
+        push("/listings");
+      })
+      .catch((err) => {
+        console.log("Error from PUT:", err);
+      });
+  };
+
   return (
     <div className="form-container">
-      <h3>Add A Listing</h3>
+      <h3>Edit Listing</h3>
 
-      <form onSubmit={addListing}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
@@ -137,12 +160,10 @@ const AddListing = () => {
 
         <div>
           <button className="btn" type="submit">
-            Add Listing
+            Edit Listing
           </button>
         </div>
       </form>
     </div>
   );
-};
-
-export default AddListing;
+}

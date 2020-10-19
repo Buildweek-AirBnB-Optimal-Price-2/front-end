@@ -1,8 +1,8 @@
 // Import Dependencies
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// import PrivateRoute from "../utilities/PrivateRoute";
+import PrivateRoute from "./utilities/PrivateRoute";
 
 // Import Assets
 import "./App.css";
@@ -14,6 +14,7 @@ import Homepage from "./components/Homepage";
 import Header from "./components/Header";
 import Listings from "./components/Listings";
 import AddListing from "./components/AddListing";
+import EditListing from "./components/EditListing";
 // Import Assets
 import "./App.css";
 
@@ -23,28 +24,32 @@ function App() {
       <div className="App">
         <Header />
 
-        <Route exact path="/">
-          <Homepage />
-        </Route>
+        <Switch>
+          <PrivateRoute exact path="/listings" component={Listings} />
+          <Route exact path="/">
+            <Homepage />
+          </Route>
 
-        <Route path="/listings">
-          <Listings />
-        </Route>
+          {/* <Route path="/listings">
+            <Listings />
+          </Route> */}
 
-        {/* This will replace the route above */}
-        {/* <PrivateRoute exact path="/listings" component={Listings}/> */}
+          <Route path="/addlisting">
+            <AddListing />
+          </Route>
 
-        <Route path="/addlisting">
-          <AddListing />
-        </Route>
+          <Route path="/editlisting/:id">
+            <EditListing />
+          </Route>
 
-        <Route path="/login">
-          <Login />
-        </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
 
-        <Route path="/register">
-          <Register />
-        </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+        </Switch>
       </div>
     </Router>
   );
