@@ -25,14 +25,15 @@ function App() {
         <Header />
 
         <Switch>
-          <PrivateRoute exact path="/listings" component={Listings} />
+          {/* Will turn on private route after we have access to token. */}
+          {/* <PrivateRoute exact path="/listings" component={Listings} /> */}
           <Route exact path="/">
             <Homepage />
           </Route>
 
-          {/* <Route path="/listings">
+          <Route path="/listings">
             <Listings />
-          </Route> */}
+          </Route>
 
           <Route path="/addlisting">
             <AddListing />
