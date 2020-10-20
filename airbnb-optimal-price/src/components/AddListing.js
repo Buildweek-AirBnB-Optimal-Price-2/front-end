@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { initialListing } from "./InitialListing";
 
-const initialListing = {
-  id: "",
-  title: "",
-  type: "",
-  location: "",
-  guests: "",
-  bedrooms: "",
-  beds: "",
-  baths: "",
-  amenities: [],
-  price: "",
-  salePrice: "",
-  featuredImg: "",
-};
 const AddListing = () => {
   const [listing, setListing] = useState(initialListing);
+  console.log(initialListing);
   const addListing = (e) => {
     e.preventDefault();
     console.log("hitting addListing");

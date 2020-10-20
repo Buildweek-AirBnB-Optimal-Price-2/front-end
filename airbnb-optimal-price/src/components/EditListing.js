@@ -1,27 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-
-const initialListing = {
-  id: "",
-  title: "",
-  type: "",
-  location: "",
-  guests: "",
-  bedrooms: "",
-  beds: "",
-  baths: "",
-  amenities: [],
-  price: "",
-  salePrice: "",
-  featuredImg: "",
-};
+import { initialListing } from "./InitialListing";
 
 export default function EditListing() {
   const [listing, setListing] = useState(initialListing);
   const { id } = useParams();
   console.log("id", id);
   const { push } = useHistory();
+  console.log(initialListing);
   useEffect(() => {
     axios
       .get(`https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`)

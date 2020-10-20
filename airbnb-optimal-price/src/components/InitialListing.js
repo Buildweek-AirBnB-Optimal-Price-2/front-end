@@ -1,0 +1,18 @@
+export const initialListing = {
+  id: "",
+  renter_id: "",
+  title: "",
+  description: "",
+  type: "",
+  street_address: "",
+  city: "",
+  state: "",
+  location: "",
+  guests: "",
+  bedrooms: "",
+  beds: "",
+  baths: "",
+  amenities: [],
+  price: "",
+  featuredImg: "",
+};
