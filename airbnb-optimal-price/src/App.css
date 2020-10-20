@@ -76,7 +76,8 @@ header a.active {
   cursor: pointer;
 }
 
-.form-container label input {
+.form-container label input,
+.form-container label textarea {
   width: 100%;
   display: block;
   border: #ccc 1px solid;
@@ -84,7 +85,12 @@ header a.active {
   margin-top: 5px;
 }
 
-.form-container input[type="submit"] {
+.form-container label textarea {
+  height: 150px;
+}
+
+.form-container input[type="submit"],
+.btn {
   cursor: pointer;
   background: #49beb7;
   display: block;
@@ -104,12 +110,14 @@ header a.active {
   color: #fcf9ea !important;
 }
 
-.form-container input[type="submit"]:hover {
+.form-container input[type="submit"]:hover,
+.btn:hover {
   background: #fcf9ea;
   color: #49beb7;
 }
 
-.form-container input[type="submit"]:disabled {
+.form-container input[type="submit"]:disabled,
+.btn:disabled {
   opacity: 0.5;
   background: #49beb7 !important;
   color: #fcf9ea !important;
