@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
-import { ListingsContext } from "../utilities/ListingsContext";
+
 import { Link } from "react-router-dom";
-import EditListing from "./EditListing";
+
 // Styled Components
 const Card = styled.div`
   padding: 20px 0;

@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // Import Components
 import ListingCard from "./ListingCard";
-import { ListingsContext } from "../utilities/ListingsContext";
+// import { ListingsContext } from "../utilities/ListingsContext";
 
 export default function Listings() {
   // Setup the state that will get the listings
