@@ -63,6 +63,12 @@ const CardMeta = styled.p`
   color: #49beb7;
 `;
 
+const CardDescription = styled.p`
+  margin-bottom: 80px;
+  margin-top: 30px;
+  margin-left: 10px;
+`;
+
 const CardPrice = styled.p`
   position: absolute;
   bottom: 0;
@@ -140,7 +146,7 @@ export default function ListingCard(props) {
 
       <CardInfo>
         <CardHeading>
-          {props.listing.type} in {props.listing.location}
+          {props.listing.type} in {props.listing.street_address}, {props.listing.city} {props.listing.state} by {props.listing.location}
         </CardHeading>
         <CardTitle>{props.listing.title}</CardTitle>
 
@@ -161,22 +167,14 @@ export default function ListingCard(props) {
           })}
         </CardMeta>
 
-        {props.listing.salePrice !== 0 && (
-          <CardPrice>
-            <del style={{ color: "#ccc" }}>${props.listing.price}</del>{" "}
-            <span style={{ fontWeight: "bold" }}>
-              ${props.listing.salePrice}
-            </span>{" "}
-            / night
-          </CardPrice>
-        )}
+        {props.listing.description !== undefined && <CardDescription>
+          {props.listing.description}
+        </CardDescription>}
 
-        {props.listing.salePrice === 0 && (
-          <CardPrice>
-            <span style={{ fontWeight: "bold" }}>${props.listing.price}</span> /
-            night
-          </CardPrice>
-        )}
+        <CardPrice>
+          <span style={{ fontWeight: "bold" }}>${props.listing.price}</span> /
+          night
+        </CardPrice>
 
         <CardButtons>
           <Link to={`/EditListing/${props.listing.id}`}>
