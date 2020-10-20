@@ -156,7 +156,7 @@ export default function EditListing() {
       <h3>Edit Listing</h3>
 
       <form onSubmit={handleSubmit}>
-      <label
+        <label
           htmlFor="title"
           className={`${
             errors.title !== "" && errors.title !== undefined
@@ -229,6 +229,43 @@ export default function EditListing() {
             onChange={handleChange}
             placeholder="Enter street address"
             value={listing.street_address}
+          />
+        </label>
+
+        <label
+          htmlFor="city"
+          className={`${
+            errors.city !== "" && errors.city !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        > 
+          City
+          <input
+            type="text"
+            name="city"
+            id="city"
+            onChange={handleChange}
+            value={listing.city}
+          />
+        </label>
+
+        <label
+          htmlFor="state"
+          className={`${
+            errors.state !== "" && errors.state !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        > 
+          State
+          <input
+            type="text"
+            name="state"
+            id="state"
+            onChange={handleChange}
+            placeholder="e.g. 'FL', 'NY'"
+            value={listing.state}
           />
         </label>
 
@@ -362,6 +399,24 @@ export default function EditListing() {
             onChange={handleChange}
             placeholder="Image URL"
             value={listing.featuredImg}
+          />
+        </label>
+
+        <label
+          htmlFor="description"
+          className={`${
+            errors.description !== "" && errors.description !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
+          Description
+          <textarea
+            type="text"
+            name="description"
+            id="description"
+            onChange={handleChange}
+            value={listing.description}
           />
         </label>
 
