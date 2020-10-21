@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // Import Components
 import ListingCard from "./ListingCard";
-// import { ListingsContext } from "../utilities/ListingsContext";
+import { ListingsContext } from "../utilities/ListingsContext";
 
 export default function Listings() {
   // Setup the state that will get the listings
@@ -59,39 +59,39 @@ export default function Listings() {
   };
 
   return (
-    // <ListingsContext.Provider value={listings}>
-    <div id="listings">
-      <div className="heading">
-        <h3>
-          Listings - {listings.length}{" "}
-          {listings.length > 1 ? "listings" : "listing"} found
-        </h3>
+    <ListingsContext.Provider value={listings}>
+      <div id="listings">
+        <div className="heading">
+          <h3>
+            Listings - {listings.length}{" "}
+            {listings.length > 1 ? "listings" : "listing"} found
+          </h3>
 
-        <Link to="/AddListing">
-          <button>Add New Listing</button>
-        </Link>
+          <Link to="/AddListing">
+            <button>Add New Listing</button>
+          </Link>
+        </div>
+
+        {listings.length > 0 &&
+          listings.map((listing, index) => {
+            const delayTimer = index;
+
+            return (
+              <ListingCard
+                listing={listing}
+                key={listing.id}
+                deleteListing={deleteListing}
+                delay={delayTimer}
+                isDeleting={isDeleting}
+              />
+            );
+          })}
+
+        {listings.length <= 0 && (
+          <p style={{ textAlign: "center" }}>No Listings Found</p>
+        )}
       </div>
-
-      {listings.length > 0 &&
-        listings.map((listing, index) => {
-          const delayTimer = index;
-
-          return (
-            <ListingCard
-              listing={listing}
-              key={listing.id}
-              deleteListing={deleteListing}
-              delay={delayTimer}
-              isDeleting={isDeleting}
-            />
-          );
-        })}
-
-      {listings.length <= 0 && (
-        <p style={{ textAlign: "center" }}>No Listings Found</p>
-      )}
-    </div>
-    // </ListingsContext.Provider>
+    </ListingsContext.Provider>
   );
 }
 
