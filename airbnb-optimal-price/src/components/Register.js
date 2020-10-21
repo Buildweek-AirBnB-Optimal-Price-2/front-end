@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 export default function Register() {
   const { push } = useHistory();
   // Declare a variable holding the default empty data
-  const defaultUserData = { password: "", username: "" };
+  const defaultUserData = { name: "", password: "", username: "", email: "" };
 
   // Get the state to hold the form data
   const [user, setUser] = useState(defaultUserData);
@@ -28,13 +28,13 @@ export default function Register() {
 
   // Form schema to be used for form validation
   const formSchema = yup.object().shape({
-    // name: yup.string().required("Please enter a name."),
+    name: yup.string().required("Please enter a name."),
     password: yup.string().required("Please enter a password."),
     username: yup.string().required("Please enter a username."),
-    // email: yup
-    //   .string()
-    //   .required("Please enter an email.")
-    //   .email("Please enter a valid email."),
+    email: yup
+      .string()
+      .required("Please enter an email.")
+      .email("Please enter a valid email."),
   });
 
   // Form to catch any errors if the form did not validated
@@ -68,10 +68,10 @@ export default function Register() {
       .then((res) => {
         console.log("New User from Registration", res.data);
         setUser({
-          // name: "",
+          name: "",
           password: "",
           username: "",
-          // email: "",
+          email: "",
         });
         alert("account created, please sign in");
         push("/login");

@@ -5,9 +5,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // Import Components
 import ListingCard from "./ListingCard";
-import { ListingsContext } from "../utilities/ListingsContext";
+import { fetchData } from "../actions/index";
+import { connect } from "react-redux";
 
-export default function Listings() {
+const Listings = (props) => {
+  console.log("props", props);
   // Setup the state that will get the listings
   const [listings, setListings] = useState([]);
 
@@ -16,15 +18,8 @@ export default function Listings() {
 
   // Function used to gather the listings whenever component loads
   useEffect(() => {
-    // setListings(dummyData);
-
-    axios
-      .get("https://5f3fba8744212d0016fed1c4.mockapi.io/listings")
-      .then((res) => {
-        setListings(res.data);
-        console.log("res.data from Listings:", res.data);
-      })
-      .catch((err) => console.log(err.response));
+    props.fetchData();
+    setListings(props.listings);
   }, []);
 
   // Function for deleting a listing
@@ -59,89 +54,41 @@ export default function Listings() {
   };
 
   return (
-    <ListingsContext.Provider value={listings}>
-      <div id="listings">
-        <div className="heading">
-          <h3>
-            Listings - {listings.length}{" "}
-            {listings.length > 1 ? "listings" : "listing"} found
-          </h3>
+    <div id="listings">
+      <div className="heading">
+        <h3>
+          Listings - {props.listings.length}{" "}
+          {props.listings.length > 1 ? "listings" : "listing"} found
+        </h3>
 
-          <Link to="/AddListing">
-            <button>Add New Listing</button>
-          </Link>
-        </div>
-
-        {listings.length > 0 &&
-          listings.map((listing, index) => {
-            const delayTimer = index;
-
-            return (
-              <ListingCard
-                listing={listing}
-                key={listing.id}
-                deleteListing={deleteListing}
-                delay={delayTimer}
-                isDeleting={isDeleting}
-              />
-            );
-          })}
-
-        {listings.length <= 0 && (
-          <p style={{ textAlign: "center" }}>No Listings Found</p>
-        )}
+        <Link to="/AddListing">
+          <button>Add New Listing</button>
+        </Link>
       </div>
-    </ListingsContext.Provider>
+
+      {props.listings.length > 0 &&
+        props.listings.map((listing, index) => {
+          const delayTimer = index;
+
+          return (
+            <ListingCard
+              listing={listing}
+              key={listing.id}
+              deleteListing={deleteListing}
+              delay={delayTimer}
+              isDeleting={isDeleting}
+            />
+          );
+        })}
+
+      {props.listings.length <= 0 && (
+        <p style={{ textAlign: "center" }}>No Listings Found</p>
+      )}
+    </div>
   );
-}
+};
+const mapStateToProps = (state) => ({
+  listings: state,
+});
 
-// Dummy temp data
-// const dummyData = [
-//   {
-//     id: 0,
-//     title: "Spacious Water View Comfy Pike Place Flat Sleeps 5",
-//     type: "Entire apartment",
-//     location: "Pike Place Market",
-//     guests: 5,
-//     bedrooms: 1,
-//     beds: 2,
-//     baths: 1,
-//     amenities: ["Wifi", "Kitchen", "Washer"],
-//     price: 167,
-//     salePrice: 143,
-//     featuredImg:
-//       "https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1339&q=80",
-//   },
-//   {
-//     id: 1,
-//     title: "My TALL, 5-level super-funky artist's loft",
-//     type: "Entire loft",
-//     location: "Minor",
-//     guests: 6,
-//     bedrooms: 3,
-//     beds: 6,
-//     baths: 2.5,
-//     amenities: ["Wifi", "Kitchen", "Free Parking", "Washer"],
-//     price: 179,
-//     salePrice: 0,
-//     featuredImg:
-//       "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-//   },
-//   {
-//     id: 2,
-//     title: "Private 2 bdrm Apartment",
-//     type: "Entire apartment",
-//     location: "Lake Forest Park",
-//     guests: 5,
-//     bedrooms: 2,
-//     beds: 2,
-//     baths: 1,
-//     amenities: ["Wifi", "Kitchen", "Free Parking", "Washer"],
-//     price: 109,
-//     salePrice: 0,
-//     featuredImg:
-//       "https://images.unsplash.com/flagged/photo-1573168710865-2e4c680d921a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
-//   },
-// ];
-
-// https://5f3fba8744212d0016fed1c4.mockapi.io/listings
+export default connect(mapStateToProps, { fetchData })(Listings);
