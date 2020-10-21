@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 
 const Listings = (props) => {
   console.log("props", props);
+  const { fetchData } = props;
   // Setup the state that will get the listings
   const [listings, setListings] = useState([]);
 
@@ -18,9 +19,8 @@ const Listings = (props) => {
 
   // Function used to gather the listings whenever component loads
   useEffect(() => {
-    props.fetchData();
-    setListings(props.listings);
-  }, []);
+    fetchData();
+  }, [fetchData]);
 
   // Function for deleting a listing
   const deleteListing = (id) => {
