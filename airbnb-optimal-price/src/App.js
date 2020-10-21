@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// import PrivateRoute from "./utilities/PrivateRoute";
+import PrivateRoute from "./utilities/PrivateRoute";
 
 // Import Assets
 import "./App.css";
@@ -26,14 +26,14 @@ function App() {
 
         <Switch>
           {/* Will turn on private route after we have access to token. */}
-          {/* <PrivateRoute exact path="/listings" component={Listings} /> */}
+          <PrivateRoute exact path="/listings" component={Listings} />
           <Route exact path="/">
             <Homepage />
           </Route>
 
-          <Route path="/listings">
+          {/* <Route path="/listings">
             <Listings />
-          </Route>
+          </Route> */}
 
           <Route path="/addlisting">
             <AddListing />

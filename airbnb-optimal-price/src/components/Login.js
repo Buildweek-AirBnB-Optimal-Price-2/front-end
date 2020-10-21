@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { gsap } from "gsap";
-// import axiosWithAuth from "../utilities/axiosWithAuth";
-// import { useHistory } from "react-router-dom";
+import axiosWithAuth from "../utilities/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
   // Declare a variable holding the default empty data
   const defaultUserData = { username: "", password: "" };
 
+  const { push } = useHistory();
   // Get the state to hold the form data
   const [user, setUser] = useState(defaultUserData);
 
@@ -57,15 +58,15 @@ export default function Login() {
   const handleSubmission = (e) => {
     e.preventDefault();
     // POST request
-    //  axiosWithAuth()
-    //  .post("/endpoint", user)
-    //  .then((res) => {
-    // Check response data for what to setItem to below
-    // console.log(res.data)
-    //    localStorage.setItem("token", res.data.token);
-    //    history.push('/protected')
-    //  })
-    // .catch((err) => console.log("err", err.message));
+    axiosWithAuth()
+      .post("https://airbnb-listing.herokuapp.com/api/users/login", user)
+      .then((res) => {
+        // Check response data for what to setItem to below
+        console.log(res.data);
+        localStorage.setItem("token", res.data.token);
+        push("/listings");
+      })
+      .catch((err) => console.log("err", err.message));
     // Check for errors first
     formErrors();
 

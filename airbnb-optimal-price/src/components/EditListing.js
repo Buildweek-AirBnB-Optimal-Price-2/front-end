@@ -1,34 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import { initialListing } from "./InitialListing";
 import * as yup from "yup";
 import { gsap } from "gsap";
-
-const initialListing = {
-  id: "",
-  renter_id: "",
-  title: "",
-  description: "",
-  type: "",
-  street_address: "",
-  city: "",
-  state: "",
-  location: "",
-  guests: "",
-  bedrooms: "",
-  beds: "",
-  baths: "",
-  amenities: [],
-  price: "",
-  salePrice: "",
-  featuredImg: "",
-};
 
 export default function EditListing() {
   const [listing, setListing] = useState(initialListing);
 
   // Set the state for the errors for validation
-  const [ errors, setErrors ] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   // Set state for to disable submit button
   const [disableSubmit, setDisableSubmit] = useState(false);
@@ -36,6 +17,7 @@ export default function EditListing() {
   const { id } = useParams();
   console.log("id", id);
   const { push } = useHistory();
+  console.log(initialListing);
   useEffect(() => {
     axios
       .get(`https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`)
@@ -73,10 +55,22 @@ export default function EditListing() {
     street_address: yup.string().required("Please enter a street address"),
     city: yup.string().required("Please enter a city"),
     state: yup.string().required("Please enter a state"),
-    guests: yup.number().typeError("Guests field must be a number").required("Please enter guests number."),
-    bedrooms: yup.number().typeError("Bedrooms field must be a number").required("Please enter bedrooms number."),
-    beds: yup.number().typeError("Beds field must be a number").required("Please enter beds number."),
-    baths: yup.number().typeError("Baths field must be a number").required("Please enter baths number."),
+    guests: yup
+      .number()
+      .typeError("Guests field must be a number")
+      .required("Please enter guests number."),
+    bedrooms: yup
+      .number()
+      .typeError("Bedrooms field must be a number")
+      .required("Please enter bedrooms number."),
+    beds: yup
+      .number()
+      .typeError("Beds field must be a number")
+      .required("Please enter beds number."),
+    baths: yup
+      .number()
+      .typeError("Baths field must be a number")
+      .required("Please enter baths number."),
     amenities: yup.string(),
     price: yup.number().typeError("Price field must be a number"),
     salePrice: yup.string(),
@@ -193,7 +187,7 @@ export default function EditListing() {
             value={listing.type}
           />
         </label>
-        
+
         <label
           htmlFor="location"
           className={`${
@@ -201,7 +195,7 @@ export default function EditListing() {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           Relative Location
           <input
             type="text"
@@ -220,7 +214,7 @@ export default function EditListing() {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           Address
           <input
             type="text"
@@ -239,7 +233,7 @@ export default function EditListing() {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           City
           <input
             type="text"
@@ -257,7 +251,7 @@ export default function EditListing() {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           State
           <input
             type="text"
@@ -363,7 +357,7 @@ export default function EditListing() {
             value={listing.amenities}
           />
         </label>
-        
+
         <label
           htmlFor="price"
           className={`${

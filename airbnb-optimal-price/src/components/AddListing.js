@@ -1,34 +1,16 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { initialListing } from "./InitialListing";
 import * as yup from "yup";
 import { gsap } from "gsap";
-
-const initialListing = {
-  id: "",
-  renter_id: "",
-  title: "",
-  description: "",
-  type: "",
-  street_address: "",
-  city: "",
-  state: "",
-  location: "",
-  guests: "",
-  bedrooms: "",
-  beds: "",
-  baths: "",
-  amenities: [],
-  price: "",
-  featuredImg: "",
-};
 
 const AddListing = () => {
   const [listing, setListing] = useState(initialListing);
 
   // Set the state for the errors for validation
-  const [ errors, setErrors ] = useState([]);
-  
+  const [errors, setErrors] = useState([]);
+
   // Set state for to disable submit button
   const [disableSubmit, setDisableSubmit] = useState(false);
 
@@ -45,10 +27,22 @@ const AddListing = () => {
     street_address: yup.string().required("Please enter a street address"),
     city: yup.string().required("Please enter a city"),
     state: yup.string().required("Please enter a state"),
-    guests: yup.number().typeError("Guests field must be a number").required("Please enter guests number."),
-    bedrooms: yup.number().typeError("Bedrooms field must be a number").required("Please enter bedrooms number."),
-    beds: yup.number().typeError("Beds field must be a number").required("Please enter beds number."),
-    baths: yup.number().typeError("Baths field must be a number").required("Please enter baths number."),
+    guests: yup
+      .number()
+      .typeError("Guests field must be a number")
+      .required("Please enter guests number."),
+    bedrooms: yup
+      .number()
+      .typeError("Bedrooms field must be a number")
+      .required("Please enter bedrooms number."),
+    beds: yup
+      .number()
+      .typeError("Beds field must be a number")
+      .required("Please enter beds number."),
+    baths: yup
+      .number()
+      .typeError("Baths field must be a number")
+      .required("Please enter baths number."),
     amenities: yup.string(),
     price: yup.number().typeError("Price field must be a number"),
     featuredImg: yup.string(),
@@ -75,7 +69,7 @@ const AddListing = () => {
     // Set the errors into the state
     setErrors(allErrors);
   };
-  
+
   const addListing = (e) => {
     e.preventDefault();
 
@@ -137,7 +131,6 @@ const AddListing = () => {
       <h3>Add A Listing</h3>
 
       <form onSubmit={addListing}>
-
         <label
           htmlFor="title"
           className={`${
@@ -175,7 +168,7 @@ const AddListing = () => {
             value={listing.type}
           />
         </label>
-        
+
         <label
           htmlFor="location"
           className={`${
@@ -183,7 +176,7 @@ const AddListing = () => {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           Relative Location
           <input
             type="text"
@@ -202,7 +195,7 @@ const AddListing = () => {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           Address
           <input
             type="text"
@@ -221,7 +214,7 @@ const AddListing = () => {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           City
           <input
             type="text"
@@ -239,7 +232,7 @@ const AddListing = () => {
               ? "invalid"
               : "valid"
           }`}
-        > 
+        >
           State
           <input
             type="text"
@@ -345,7 +338,7 @@ const AddListing = () => {
             value={listing.amenities}
           />
         </label>
-        
+
         <label
           htmlFor="price"
           className={`${

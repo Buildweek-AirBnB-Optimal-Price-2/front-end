@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { gsap } from "gsap";
-// import axios from "axios";
-// import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Register() {
+  const { push } = useHistory();
   // Declare a variable holding the default empty data
   const defaultUserData = { name: "", password: "", username: "", email: "" };
 
@@ -62,20 +63,20 @@ export default function Register() {
   const handleSubmission = (e) => {
     e.preventDefault();
     // POST request
-    // axios
-    //   .post("/endpoint", user)
-    //   .then((res) => {
-    //     console.log("New User from Registration", res.data);
-    //     setUser({
-    //       name: "",
-    //       password: "",
-    //       username: "",
-    //       email: "",
-    //     });
-    //  alert("account created, please sign in");
-    // push("/login");
-    //   })
-    //   .catch((err) => console.log("err", err.message));
+    axios
+      .post("https://airbnb-listing.herokuapp.com/api/users/register", user)
+      .then((res) => {
+        console.log("New User from Registration", res.data);
+        setUser({
+          name: "",
+          password: "",
+          username: "",
+          email: "",
+        });
+        alert("account created, please sign in");
+        push("/login");
+      })
+      .catch((err) => console.log("err", err.message));
 
     // Check for errors first
     formErrors();
@@ -189,7 +190,7 @@ export default function Register() {
           />
         </label>
 
-        <input type="submit" value="Log in" disabled={disableSubmit} />
+        <input type="submit" value="Register" disabled={disableSubmit} />
       </form>
 
       {Object.keys(errors).length > 0 && (
