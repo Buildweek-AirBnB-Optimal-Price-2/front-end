@@ -64,7 +64,7 @@ export default function Register() {
     e.preventDefault();
     // POST request
     axios
-      .post("https://airbnb-listing.herokuapp.com/api/users/register", user)
+      .post("https://airbnb-best-price.herokuapp.com/register", user)
       .then((res) => {
         console.log("New User from Registration", res.data);
         setUser({

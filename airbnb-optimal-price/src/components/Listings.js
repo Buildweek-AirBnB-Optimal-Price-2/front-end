@@ -1,12 +1,12 @@
 // Import Dependencies
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
-import axios from "axios";
 import { Link } from "react-router-dom";
 // Import Components
 import ListingCard from "./ListingCard";
 import { fetchData } from "../actions/index";
 import { connect } from "react-redux";
+import axiosWithAuth from "../utilities/axiosWithAuth";
 
 const Listings = (props) => {
   console.log("props", props);
@@ -45,8 +45,9 @@ const Listings = (props) => {
     }, 1000);
 
     // Delete listing from backend
-    axios
-      .delete(`https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`)
+    console.log("id", id);
+    axiosWithAuth()
+      .delete(`https://airbnb-best-price.herokuapp.com/api/rental/${id}`)
       .then((res) => {
         console.log("Listing.sjs: deleteListing: res: ", res);
       })

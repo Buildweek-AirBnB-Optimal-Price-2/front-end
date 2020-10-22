@@ -9,8 +9,12 @@ export const fetchData = () => (dispatch) => {
   dispatch({ type: FETCH_DATA_START });
 
   axios
-    .get(`https://5f3fba8744212d0016fed1c4.mockapi.io/listings`)
-    .then((res) => dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data }))
+    .get(`http://airbnb-best-price.herokuapp.com/api/rental`)
+    .then((res) => {
+      console.log("response", res.data);
+      dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
+    })
+
     .catch((err) => {
       dispatch({
         type: FETCH_DATA_FAIL,

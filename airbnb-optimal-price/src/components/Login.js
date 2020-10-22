@@ -59,7 +59,7 @@ export default function Login() {
     e.preventDefault();
     // POST request
     axiosWithAuth()
-      .post("https://airbnb-listing.herokuapp.com/api/users/login", user)
+      .post("https://airbnb-best-price.herokuapp.com/login", user)
       .then((res) => {
         // Check response data for what to setItem to below
         console.log(res.data);
