@@ -69,17 +69,17 @@ const CardDescription = styled.p`
   margin-left: 10px;
 `;
 
-const CardPrice = styled.p`
-  position: absolute;
-  bottom: 0;
-  right: 0;
+// const CardPrice = styled.p`
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
 
-  @media (max-width: 800px) {
-    position: static;
-    margin-top: 25px;
-    margin-bottom: 10px;
-  }
-`;
+//   @media (max-width: 800px) {
+//     position: static;
+//     margin-top: 25px;
+//     margin-bottom: 10px;
+//   }
+// `;
 
 const CardButtons = styled.div`
   position: absolute;
