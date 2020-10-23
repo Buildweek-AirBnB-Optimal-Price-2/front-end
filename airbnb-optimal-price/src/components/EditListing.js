@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import axios from "axios";
 import { initialListing } from "./InitialListing";
 import * as yup from "yup";
 import { gsap } from "gsap";
+import axiosWithAuth from "../utilities/axiosWithAuth";
 
 export default function EditListing() {
   const [listing, setListing] = useState(initialListing);
@@ -17,13 +17,15 @@ export default function EditListing() {
   const { id } = useParams();
   console.log("id", id);
   const { push } = useHistory();
-  console.log(initialListing);
   useEffect(() => {
-    axios
-      .get(`https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`)
+    axiosWithAuth()
+      .get(`https://airbnb-best-price.herokuapp.com/api/rental/${id}`)
       .then((res) => {
         console.log("EditListing.js: useEffect: get: res: ", res);
-        setListing(res.data);
+        var response = res.data;
+        // delete response.id;
+        delete response.amenity;
+        setListing(response);
       })
       .catch((err) => console.error(`unable to getById # ${id}: `, err));
   }, [id]);
@@ -36,13 +38,13 @@ export default function EditListing() {
     });
   };
 
-  const handleAmenitiesChange = (e) => {
-    const changedAmenities = e.target.value.split(",");
-    setListing({
-      ...listing,
-      amenities: changedAmenities,
-    });
-  };
+  // const handleAmenitiesChange = (e) => {
+  //   const changedAmenities = e.target.value.split(",");
+  //   setListing({
+  //     ...listing,
+  //     amenity: changedAmenities,
+  //   });
+  // };
 
   // Form schema to be used for form validation
   const formSchema = yup.object().shape({
@@ -71,10 +73,12 @@ export default function EditListing() {
       .number()
       .typeError("Baths field must be a number")
       .required("Please enter baths number."),
-    amenities: yup.string(),
-    price: yup.number().typeError("Price field must be a number"),
+    amenity: yup.string(),
+    // price: yup.number().typeError("Price field must be a number"),
     salePrice: yup.string(),
     featuredImg: yup.string(),
+    country: yup.string(),
+    zip: yup.string(),
   });
 
   // Form to catch any errors if the form did not validated
@@ -114,9 +118,9 @@ export default function EditListing() {
         setErrors({});
 
         // Submit the form
-        axios
+        axiosWithAuth()
           .put(
-            `https://5f3fba8744212d0016fed1c4.mockapi.io/listings/${id}`,
+            `https://airbnb-best-price.herokuapp.com/api/rental/${id}`,
             listing
           )
           .then((res) => {
@@ -144,7 +148,7 @@ export default function EditListing() {
       }
     });
   };
-
+  console.log("listing", listing);
   return (
     <div className="form-container">
       <h3>Edit Listing</h3>
@@ -339,10 +343,10 @@ export default function EditListing() {
           />
         </label>
 
-        <label
-          htmlFor="amenities"
+        {/* <label
+          htmlFor="amenity"
           className={`${
-            errors.amenities !== "" && errors.amenities !== undefined
+            errors.amenity !== "" && errors.amenity !== undefined
               ? "invalid"
               : "valid"
           }`}
@@ -350,14 +354,14 @@ export default function EditListing() {
           Amenities
           <input
             type="text"
-            name="amenities"
-            id="amenities"
+            name="amenity"
+            id="amenity"
             onChange={handleAmenitiesChange}
             placeholder="Comma separated e.g., 'wifi, kitchen, pool"
-            value={listing.amenities}
+            value={listing.amenity}
           />
-        </label>
-
+        </label> */}
+        {/* 
         <label
           htmlFor="price"
           className={`${
@@ -375,7 +379,7 @@ export default function EditListing() {
             placeholder="Enter price per night"
             value={listing.price}
           />
-        </label>
+        </label> */}
 
         <label
           htmlFor="featuredImg"

@@ -69,17 +69,17 @@ const CardDescription = styled.p`
   margin-left: 10px;
 `;
 
-const CardPrice = styled.p`
-  position: absolute;
-  bottom: 0;
-  right: 0;
+// const CardPrice = styled.p`
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
 
-  @media (max-width: 800px) {
-    position: static;
-    margin-top: 25px;
-    margin-bottom: 10px;
-  }
-`;
+//   @media (max-width: 800px) {
+//     position: static;
+//     margin-top: 25px;
+//     margin-bottom: 10px;
+//   }
+// `;
 
 const CardButtons = styled.div`
   position: absolute;
@@ -115,7 +115,7 @@ const CardButton = styled.button`
 
 export default function ListingCard(props) {
   //  Context provides the props
-  console.log("props", props);
+  console.log("props", props.listing.id);
 
   // Confirm first whether or not to delete listing
   const confirmDeletion = () => {
@@ -146,7 +146,8 @@ export default function ListingCard(props) {
 
       <CardInfo>
         <CardHeading>
-          {props.listing.type} in {props.listing.street_address}, {props.listing.city} {props.listing.state} by {props.listing.location}
+          {props.listing.type} in {props.listing.street_address},{" "}
+          {props.listing.city} {props.listing.state} by {props.listing.location}
         </CardHeading>
         <CardTitle>{props.listing.title}</CardTitle>
 
@@ -157,24 +158,24 @@ export default function ListingCard(props) {
           {props.listing.beds} beds . {props.listing.baths} baths
         </CardMeta>
 
-        <CardMeta>
-          {props.listing.amenities.map((amenity, index) => {
+        {/* <CardMeta>
+          {props.listing.amenity.map((amenity, index) => {
             return (
               <span key={index}>
-                {index ? " . " : ""} {amenity}
+                {index ? " . " : ""} {amenity.amenity_name}
               </span>
             );
           })}
-        </CardMeta>
+        </CardMeta> */}
 
-        {props.listing.description !== undefined && <CardDescription>
-          {props.listing.description}
-        </CardDescription>}
-
+        {props.listing.description !== undefined && (
+          <CardDescription>{props.listing.description}</CardDescription>
+        )}
+        {/* 
         <CardPrice>
           <span style={{ fontWeight: "bold" }}>${props.listing.price}</span> /
           night
-        </CardPrice>
+        </CardPrice> */}
 
         <CardButtons>
           <Link to={`/EditListing/${props.listing.id}`}>

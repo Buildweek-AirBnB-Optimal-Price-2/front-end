@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { initialListing } from "./InitialListing";
 import * as yup from "yup";
 import { gsap } from "gsap";
+import axiosWithAuth from "../utilities/axiosWithAuth";
+import { fetchData } from "../actions";
 
 const AddListing = () => {
   const [listing, setListing] = useState(initialListing);
@@ -43,9 +44,11 @@ const AddListing = () => {
       .number()
       .typeError("Baths field must be a number")
       .required("Please enter baths number."),
-    amenities: yup.string(),
-    price: yup.number().typeError("Price field must be a number"),
+    // amenity: yup.string(),
+    // price: yup.number().typeError("Price field must be a number"),
     featuredImg: yup.string(),
+    country: yup.string(),
+    zip: yup.number(),
   });
 
   // Form to catch any errors if the form did not validated
@@ -87,10 +90,13 @@ const AddListing = () => {
         setErrors({});
 
         // Submit the form
-        axios
-          .post("https://5f3fba8744212d0016fed1c4.mockapi.io/listings", listing)
+        axiosWithAuth()
+          .post("https://airbnb-best-price.herokuapp.com/api/rental/", listing)
+          // console
+          //   .log(listing)
           .then((res) => {
             console.log("AddListing.js: post: res: ", res);
+            fetchData();
             push("/listings");
           })
           .catch((err) => console.error("err from AddListing", err));
@@ -118,13 +124,13 @@ const AddListing = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleAmenitiesChange = (e) => {
-    const changedAmenities = e.target.value.split(",");
-    setListing({
-      ...listing,
-      amenities: changedAmenities,
-    });
-  };
+  // const handleAmenitiesChange = (e) => {
+  //   const changedAmenities = e.target.value.split(",");
+  //   setListing({
+  //     ...listing,
+  //     amenity: changedAmenities,
+  //   });
+  // };
 
   return (
     <div className="form-container">
@@ -166,6 +172,24 @@ const AddListing = () => {
             onChange={handleChange}
             placeholder="e.g., 'whole house', 'downstairs'"
             value={listing.type}
+          />
+        </label>
+        <label
+          htmlFor="country"
+          className={`${
+            errors.type !== "" && errors.type !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
+          Country
+          <input
+            type="text"
+            name="country"
+            id="country"
+            onChange={handleChange}
+            placeholder="Country"
+            value={listing.country}
           />
         </label>
 
@@ -241,6 +265,24 @@ const AddListing = () => {
             onChange={handleChange}
             placeholder="e.g. 'FL', 'NY'"
             value={listing.state}
+          />
+        </label>
+        <label
+          htmlFor="zip"
+          className={`${
+            errors.state !== "" && errors.state !== undefined
+              ? "invalid"
+              : "valid"
+          }`}
+        >
+          Zip Code
+          <input
+            type="number"
+            name="zip"
+            id="zip"
+            onChange={handleChange}
+            placeholder="Zip Code"
+            value={listing.zip}
           />
         </label>
 
@@ -320,10 +362,10 @@ const AddListing = () => {
           />
         </label>
 
-        <label
-          htmlFor="amenities"
+        {/* <label
+          htmlFor="amenity"
           className={`${
-            errors.amenities !== "" && errors.amenities !== undefined
+            errors.amenity !== "" && errors.amenity !== undefined
               ? "invalid"
               : "valid"
           }`}
@@ -331,15 +373,15 @@ const AddListing = () => {
           Amenities
           <input
             type="text"
-            name="amenities"
-            id="amenities"
+            name="amenity"
+            id="amenity"
             onChange={handleAmenitiesChange}
             placeholder="Comma separated e.g., 'wifi, kitchen, pool"
-            value={listing.amenities}
+            value={listing.amenity}
           />
-        </label>
+        </label> */}
 
-        <label
+        {/* <label
           htmlFor="price"
           className={`${
             errors.price !== "" && errors.price !== undefined
@@ -356,7 +398,7 @@ const AddListing = () => {
             placeholder="Enter price per night"
             value={listing.price}
           />
-        </label>
+        </label> */}
 
         <label
           htmlFor="featuredImg"
