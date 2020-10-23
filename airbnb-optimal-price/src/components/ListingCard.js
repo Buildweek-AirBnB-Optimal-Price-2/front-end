@@ -10,9 +10,13 @@ const Card = styled.div`
   padding: 20px 0;
   border-bottom: 1px solid #ebebeb;
   display: flex;
-  max-width: 800px;
+  max-width: 1000px;
   justify-content: space-between;
   margin: 0 auto;
+  background: #badfdb;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 
   @media (max-width: 800px) {
     width: 100%;
@@ -42,7 +46,7 @@ const CardInfo = styled.div`
 
 const CardHeading = styled.p`
   font-style: italic;
-  color: #929292;
+  color: #ff8a5c;
 `;
 
 const CardTitle = styled.h3`
@@ -54,7 +58,7 @@ const TitleSeparator = styled.hr`
   width: 50px;
   margin: 15px 0;
   height: 1px;
-  background-color: #ebebeb;
+  background-color: #000;
   border: none;
 `;
 

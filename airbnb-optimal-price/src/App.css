@@ -6,19 +6,51 @@ input {
   transition: 0.3s all;
 }
 
+body {
+  background: #fcf9ea;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Header Styles */
 
 header {
   text-align: center;
-  margin: 10px auto 20px;
+  margin: 0 auto;
+  background: #ff8a5c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  overflow: hidden;
+  border-bottom: #49beb7 10px solid;
+}
+
+#logo {
+  height: 80px;
+}
+
+#logo img {
+  max-height: 100%;
+  width: auto !important;
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
 }
 
 header nav a {
   text-decoration: none;
   font-weight: bold;
-  padding: 5px 15px;
-  margin: 0 5px;
-  color: #49beb7;
+  padding: 25px 15px;
+  margin: 0;
+  color: #fcf9ea;
+  font-size: 20px;
+  text-transform: uppercase;
 }
 
 header nav a:hover,
@@ -27,10 +59,60 @@ header a.active {
   color: #fcf9ea;
 }
 
+/* Home Styles */
+
+#slider {
+  width: 100%;
+  height: 30vw;
+  background: #ff8a5c;
+}
+
+#slider .slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+#slider .slide .layer-1 {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 30px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+#slider .slide .layer-1 h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 30pt;
+}
+
+#slider .slide .layer-1 h3 {
+  font-size: 20pt;
+}
+
+#slider .layer-2 a {
+  text-decoration: none;
+  background: #49beb7;
+  color: white;
+  display: inline-block;
+  padding: 10px 25px;
+  font-size: 18pt;
+  margin: 0 10px;
+}
+
+#slider .layer-2 a:hover {
+  transform: scale(1.1);
+  background: #ff8a5c;
+}
+
 /* Listing Styles */
 
 #listings {
-  width: 80%;
   margin: 25px auto;
 }
 
