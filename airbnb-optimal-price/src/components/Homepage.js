@@ -39,7 +39,7 @@ export default function Homepage() {
 
           <div className="layer-2">
             <Link to="/listings">Check Listings</Link>
-            <a href="https://vigorous-hypatia-247fe3.netlify.app/about.html" target="_blank" rel="noopener noreferrer">Mee the crew</a>
+            <a href="https://vigorous-hypatia-247fe3.netlify.app/about.html" target="_blank" rel="noopener noreferrer">Meet the crew</a>
           </div>
         </div>
       </div>
