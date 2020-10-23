@@ -23,7 +23,7 @@ export default function EditListing() {
       .then((res) => {
         console.log("EditListing.js: useEffect: get: res: ", res);
         var response = res.data;
-        delete response.id;
+        // delete response.id;
         delete response.amenity;
         setListing(response);
       })
