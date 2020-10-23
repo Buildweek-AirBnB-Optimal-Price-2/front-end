@@ -9,7 +9,7 @@ export const fetchData = () => (dispatch) => {
   dispatch({ type: FETCH_DATA_START });
 
   axios
-    .get(`http://airbnb-best-price.herokuapp.com/api/rental`)
+    .get(`https://airbnb-best-price.herokuapp.com/api/rental`)
     .then((res) => {
       console.log("response", res.data);
       dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data });
